@@ -1,0 +1,51 @@
+#/usr/bin/env zsh
+
+set -x
+set -e
+
+cd ~
+
+# enable Colors and ParalelDownloads in /etc/pacman.conf
+sudo sed -i '/ParallelDownloads/s/^#//g' /etc/pacman.conf
+sudo sed -i '/Color/s/^#//g' /etc/pacman.conf
+
+sudo sed -i '/en_US.UTF-8 UTF-8/s/^#//g' /etc/locale.gen
+
+sudo locale-gen
+
+sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bpk
+echo 'Server = http://de3.mirror.archlinuxarm.org/$arch/$repo' | sudo tee /etc/pacman.d/mirrorlist
+
+sudo pacman -Syuu --noconfirm
+
+sudo pacman --noconfirm -S \
+  base-devel python python-pip python-setuptools \
+  zsh neovim python-pynvim ipython \
+  fzf bat fd git python-poetry \
+  kubectl kubectx go nodejs npm \
+  unzip wget ripgrep lua-jsregexp \
+  github-cli atuin pacman-contrib \
+  aws-vault htop postgresql pass k9s \
+  powerline direnv tmux hyperfine
+
+sudo npm install -g neovim
+
+git clone --recursive https://github.com/fernandotakai/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+
+setopt EXTENDED_GLOB
+
+for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+done
+
+mkdir $HOME/bin
+
+git clone https://github.com/fernandotakai/nvim-config $HOME/.config/nvim
+git clone https://github.com/wfxr/forgit.git $HOME/.config/forgit
+
+if [[ -f $(which mac) ]]; then
+    mac link docker
+    mac link docker-compose
+fi
+
+sudo chsh -s /usr/bin/zsh fernando
