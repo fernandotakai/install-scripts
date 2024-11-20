@@ -1,0 +1,5 @@
+set -x
+set -e
+
+sudo pacman -Syuu --noconfirm
+sudo pacman --noconfirm -S zsh

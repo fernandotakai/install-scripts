@@ -3,6 +3,8 @@
 set -x
 set -e
 
+which setopt
+
 cd ~
 
 # enable Colors and ParalelDownloads in /etc/pacman.conf
@@ -33,7 +35,9 @@ sudo pacman --noconfirm -S \
 
 sudo npm install -g neovim
 
-git clone --recursive https://github.com/fernandotakai/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+if [[ ! -d "${ZDOTDIR:-$HOME}/.zprezto" ]]; then
+  git clone --recursive https://github.com/fernandotakai/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+fi
 
 setopt EXTENDED_GLOB
 
