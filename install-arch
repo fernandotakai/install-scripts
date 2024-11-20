@@ -50,6 +50,8 @@ mkdir $HOME/bin
 git clone https://github.com/fernandotakai/nvim-config $HOME/.config/nvim
 git clone https://github.com/wfxr/forgit.git $HOME/.config/forgit
 
+set +e
+
 if [[ -f $(which mac) ]]; then
     mac link docker
     mac link docker-compose
