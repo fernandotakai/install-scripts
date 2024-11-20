@@ -20,13 +20,16 @@ sudo pacman -Syuu --noconfirm
 
 sudo pacman --noconfirm -S \
   base-devel python python-pip python-setuptools \
-  zsh neovim python-pynvim ipython \
+  zsh neovim python-pynvim ipython p \
   fzf bat fd git python-poetry \
   kubectl kubectx go nodejs npm \
   unzip wget ripgrep lua-jsregexp \
   github-cli atuin pacman-contrib \
   aws-vault htop postgresql pass k9s \
-  powerline direnv tmux hyperfine
+  powerline direnv tmux hyperfine \
+  ncdu libsodium pyenv pango \
+  rabbitmq rabbitmqadmin traefik \
+  redis uv
 
 sudo npm install -g neovim
 
@@ -46,6 +49,7 @@ git clone https://github.com/wfxr/forgit.git $HOME/.config/forgit
 if [[ -f $(which mac) ]]; then
     mac link docker
     mac link docker-compose
+    mac link aws-vault
 fi
 
 sudo chsh -s /usr/bin/zsh fernando
