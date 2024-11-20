@@ -42,7 +42,7 @@ fi
 setopt EXTENDED_GLOB
 
 for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}" || true
 done
 
 mkdir $HOME/bin
@@ -50,7 +50,7 @@ mkdir $HOME/bin
 git clone https://github.com/fernandotakai/nvim-config $HOME/.config/nvim
 git clone https://github.com/wfxr/forgit.git $HOME/.config/forgit
 
-set +e
+set +x
 
 if [[ -f $(which mac) ]]; then
     mac link docker
