@@ -22,7 +22,7 @@ sudo pacman -Syuu --noconfirm
 
 sudo pacman --noconfirm -S \
   base-devel python python-pip python-setuptools \
-  zsh neovim python-pynvim ipython p \
+  zsh neovim python-pynvim ipython \
   fzf bat fd git python-poetry \
   kubectl kubectx go nodejs npm \
   unzip wget ripgrep lua-jsregexp \
